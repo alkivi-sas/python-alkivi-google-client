@@ -19,7 +19,7 @@ google_client = google.Client(scopes=[scope])
 
 # Get directory client for Admin SDK api
 impersonate = 'toto@alkivi.fr'
-directory_client = GOOGLE_API.get_directory_client(impersonate)
+directory_client = google_client.get_directory_client(impersonate)
 ```
 
 Credentials are check from
