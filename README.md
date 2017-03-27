@@ -1,61 +1,32 @@
-python-alkivi-logger
+python-alkivi-google-client
 ==========================
 
-[![Build Status](https://travis-ci.org/alkivi-sas/python-alkivi-logger.svg?branch=master)](https://travis-ci.org/alkivi-sas/python-alkivi-logger)
-[![Requirements Status](https://requires.io/github/alkivi-sas/python-alkivi-logger/requirements.svg?branch=master)](https://requires.io/github/alkivi-sas/python-alkivi-logger/requirements/?branch=master)
+[![Build Status](https://travis-ci.org/alkivi-sas/python-alkivi-google-client.svg?branch=master)](https://travis-ci.org/alkivi-sas/python-alkivi-google-client)
+[![Requirements Status](https://requires.io/github/alkivi-sas/python-alkivi-google-client/requirements.svg?branch=master)](https://requires.io/github/alkivi-sas/python-alkivi-google-client/requirements/?branch=master)
 
-Python logger used at Alkivi
+Google python client used at Alkivi
 
 ## Package
 
 Example
 
 ```python
-from alkivi import logger as _logger
+from alkivi.google import client as google
 import logging
 
-#
-# Define Logger
-#
-logger = _logger.Logger(
-        min_log_level_to_mail   = logging.ERROR,
-        min_log_level_to_save   = logging.DEBUG,
-        min_log_level_to_print  = logging.DEBUG,
-        min_log_level_to_syslog = None,
-        emails=['anthony@alkivi.fr'])
+scope = 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+google_client = google.Client(scopes=[scope])
 
-#
-# Basic usage
-#
-logger.debug_debug('This is a very low level debug')
-logger.debug('This is a debug comment')
-logger.log('This is a basic log')
-logger.info('This is a info comment')
-logger.important('This is an important comment')
-logger.warning('This is a warning comment')
-logger.error('This is a error comment')
-logger.critical('THis is very dangerous, please have a look !')
-
-#
-# Now let's do some loop
-#
-logger.new_loop_logger()
-for i in range(0, 11):
-    logger.new_iteration(prefix='i=%i' % (i))
-    logger.debug("We are now prefixing all logger")
-    if i == 9:
-        logger.debug("Lets do another loop")
-        logger.new_loop_logger()
-        for j in range(0, 5):
-            logger.new_iteration(prefix='j=%i' % (j))
-            logger.debug("Alkivi pow@")
-
-        # Dont forget to close logger or shit will happen
-        logger.del_loop_logger()
-
-logger.del_loop_logger()
-logger.debug('We now remove an loop, thus a prefix')
+# Get directory client for Admin SDK api
+impersonate = 'toto@alkivi.fr'
+directory_client = GOOGLE_API.get_directory_client(impersonate)
 ```
+
+Credentials are check from
+- ./google.conf
+- $HOME/.google.conf
+- /etc/google.conf
+
 
 ## Tests
 
