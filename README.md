@@ -27,6 +27,24 @@ Credentials are check from
 - $HOME/.google.conf
 - /etc/google.conf
 
+```ini
+[default]
+; general configuration: default endpoint
+endpoint=account1
+
+[account1]
+; configuration specific to 'account1' endpoint
+; using can be 
+; - service: for Service Account
+; - oauth: for OAuth authentification
+using=service
+
+; for Service Account
+service_account_key=/path/to_your_service_key.json
+
+; for OAuth
+TODO
+```
 
 ## Tests
 
