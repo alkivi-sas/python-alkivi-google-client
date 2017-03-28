@@ -1,2 +1,5 @@
 pytest
 pytest-cov
+alkivi-logger
+google-api-python-client
+twine
