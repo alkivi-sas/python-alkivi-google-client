@@ -25,6 +25,9 @@ google_client = google.Client(endpoint='account2')
 # Get directory client for Admin SDK api
 impersonate = 'toto@alkivi.fr'
 directory_client = google_client.get_directory_client(impersonate)
+
+# Get a gmail client for gmail API
+gmail_client = google_client.get_gmail_client()
 ```
 
 ## Credentials
@@ -51,11 +54,14 @@ using=service
 ; for Service Account
 service_account_key=/path/to_your_service_key.json
 
-; for OAuth
-TODO
-
 [account2]
 ; other account configuration
+using=oauth
+
+; for OAuth
+client_id=your_client_id
+client_secret=your_client_secret
+refresh_token=your_refresh_token
 ```
 
 ## Tests

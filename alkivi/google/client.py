@@ -16,7 +16,7 @@ class Client(object):
                  # Related to service account
                  service_account_key=None,
                  # Related to oauth
-                 client_id=None, client_secret=None,
+                 client_id=None, client_secret=None, refresh_token=None,
                  # General
                  scopes=[],
                  config_file=None, logger=None):
@@ -62,6 +62,8 @@ class Client(object):
                 client_id = config.get(endpoint, 'client_id')
             if client_secret is None:
                 client_secret = config.get(endpoint, 'client_secret')
+            if refresh_token is None:
+                refresh_token = config.get(endpoint, 'refresh_token')
 
         # Save scopes
         self.scopes = scopes
@@ -73,7 +75,7 @@ class Client(object):
         elif using == 'oauth':
             self.credentials = get_oauth_credentials(client_id,
                                                      client_secret,
-                                                     scopes=scopes)
+                                                     refresh_token)
 
     def create_delegated(self, email):
         """Impersonate user."""
@@ -84,3 +86,9 @@ class Client(object):
         credentials = self.create_delegated(email)
         return build('admin', 'directory_v1', credentials=credentials,
                      cache_discovery=False)
+
+    def get_gmail_client(self):
+        """Get a gmail API client."""
+        return build('gmail', 'v1', credentials=self.credentials,
+                     cache_discovery=False)
+
