@@ -18,7 +18,7 @@ except(IOError, ImportError):
     long_description = open(readme).read()
 
 setup(
-    name='alkivi-google',
+    name='alkivi-google-client',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
