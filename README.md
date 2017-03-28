@@ -15,17 +15,26 @@ from alkivi.google import client as google
 import logging
 
 scope = 'https://www.googleapis.com/auth/admin.directory.user.readonly'
+
+# Using default configuration
 google_client = google.Client(scopes=[scope])
+
+# Using specific endpoint
+google_client = google.Client(endpoint='account2')
 
 # Get directory client for Admin SDK api
 impersonate = 'toto@alkivi.fr'
 directory_client = google_client.get_directory_client(impersonate)
 ```
 
-Credentials are check from
-- ./google.conf
+## Credentials
+
+Credentials are fetched from, in priority order:
+- ./google.conf (script directory)
 - $HOME/.google.conf
 - /etc/google.conf
+
+Example
 
 ```ini
 [default]
@@ -44,6 +53,9 @@ service_account_key=/path/to_your_service_key.json
 
 ; for OAuth
 TODO
+
+[account2]
+; other account configuration
 ```
 
 ## Tests
