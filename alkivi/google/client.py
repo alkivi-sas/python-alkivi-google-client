@@ -87,8 +87,13 @@ class Client(object):
         return build('admin', 'directory_v1', credentials=credentials,
                      cache_discovery=False)
 
+    def get_reports_client(self, email):
+        """Get an admin SDK reports API client."""
+        credentials = self.create_delegated(email)
+        return build('admin', 'reports_v1', credentials=credentials,
+                     cache_discovery=False)
+
     def get_gmail_client(self):
         """Get a gmail API client."""
         return build('gmail', 'v1', credentials=self.credentials,
                      cache_discovery=False)
-
