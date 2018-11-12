@@ -3,3 +3,4 @@ pytest-cov
 alkivi-logger
 google-api-python-client
 twine
+oauth2client
